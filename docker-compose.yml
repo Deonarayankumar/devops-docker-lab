@@ -1,19 +1,4 @@
 services:
-  api:
-    build:
-      context: ./apps/python-api
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    environment:
-      DATABASE_URL: postgresql://app:app@db:5432/appdb
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - frontend
-      - backend
-
   db:
     image: postgres:16-alpine
     environment:
@@ -22,17 +7,6 @@ services:
       POSTGRES_DB: appdb
     volumes:
       - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U app -d appdb"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    networks:
-      - backend
-
-networks:
-  frontend:
-  backend:
 
 volumes:
   pgdata:
