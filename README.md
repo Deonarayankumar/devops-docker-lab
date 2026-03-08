@@ -1,3 +1,3 @@
 # DevOps Docker Lab
 
-Docker and Compose lab.
+Run `docker compose up --build` and hit http://localhost:8000/health
